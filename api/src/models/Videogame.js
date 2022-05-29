@@ -44,16 +44,4 @@ module.exports = (sequelize) => {
     timestamps: false
   });
 
-  sequelize.define('genre', {
-    id: {
-      type: DataTypes.INTEGER,
-      primaryKey: true
-    },
-    name: {
-      type: DataTypes.STRING
-    }
-  },
-  {
-    timestamps: false
-  })
 };
