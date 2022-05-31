@@ -7,35 +7,27 @@ const axios = require('axios')
 
 function searchGames(name) {
     let arrayGames = [];
+    let conditions = {}
+    let search = ''
     if(name) {
-        for(var i = 1; i < 6; i++){
-            arrayGames.push(axios.get(`${url}?search=${name}&key=${API_KEY}&page=${i}`))
+        conditions.where = {
+            name: {
+                [Op.iLike]: `%${name}%`
+            }
         }
-        const findByNameDb = Videogame.findAll({
-            where:{
-                name: {
-                    [Op.iLike]: `%${name}%`
-                }
-            },
-            includes: [{
-                model: 'genre',
-                as: 'genres',
-                attributes: 'name'
-            }]
-        })
-        arrayGames.push(findByNameDb)
+        search = `search=${name}&`
+        arrayGames.push(axios.get(`${url}?${search}key=${API_KEY}&page_size=15`))
     } else {
-        for(var i = 1; i < 6; i++){
-            arrayGames.push(axios.get(`${url}?key=${API_KEY}&page=${i}`))
+        arrayGames.push(axios.get(`${url}?${search}key=${API_KEY}&page_size=40`))
+        for(var i = 3; i < 6; i++){
+            arrayGames.push(axios.get(`${url}?${search}key=${API_KEY}&page=${i}`))
         }
-        arrayGames.push(Videogame.findAll({
-            includes: [{
-                model: Genre,
-                as: 'genres',
-                attributes: 'name'
-            }]
-        }))
-    }  
+    }
+    conditions.include = {
+        model: Genre,
+        as: 'genres'
+    }
+    arrayGames.push(Videogame.findAll(conditions))
     return arrayGames
 }
 

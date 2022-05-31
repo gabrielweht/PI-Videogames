@@ -7,27 +7,34 @@ const axios = require('axios')
 const { searchGames } = require('../functions/functionSearch.js')
 const router = Router();
 
-router.get('/', async (req, res) => {
+router.get('/', async (req, res, next) => {
     try {
         const { name } = req.query;
         const arraySearch = searchGames(name)
-        const response = await Promise.all(arraySearch)
-        const DBgames = response.pop()
+        const response = await Promise.allSettled(arraySearch)
+        const filteredResponse = response.filter(resp => resp.status === 'fulfilled')
+        const DBgames = filteredResponse.pop().value.map(game => {
+            return {
+                id: game.id,
+                name: game.name,
+                background_image: game.background_image,
+                genres: game.genres.map(gen => gen.name)
+            }
+        })
         const APIvideogames = []
-        for(var i = 0; i < response.length; i++){
-            response[i].data.results.forEach((el) => {
+        filteredResponse.forEach((el) => {
+            el.value.data.results.forEach((result => {
                 APIvideogames.push({
-                    id: el.id,
-                    name: el.name,
-                    background_image: el.background_image,
-                    genres: el.genres.map(gen => gen.name)
+                    id: result.id,
+                    name: result.name,
+                    background_image: result.background_image,
+                    genres: result.genres.map(gen => gen.name)
                 })
-    
-                })
-        }
+            }))               
+        })
         res.json({APIvideogames, DBgames})
     } catch (error) {
-        console.log(error.message)
+        next(error)
     }
 })
 
