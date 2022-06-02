@@ -1,5 +1,5 @@
 import { GET_GENRES, GET_VIDEOGAMES, GET_VIDEOGAME_DETAILS, ADD_VIDEOGAME } from "./actions-types";
-const axios = require('axios')
+const axios = require('axios') 
 
 export function getVideogames(name) {
     let parameter = ''
