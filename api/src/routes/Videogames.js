@@ -9,30 +9,33 @@ const router = Router();
 
 router.get('/', async (req, res, next) => {
     try {
+        let gamesArray = []
         const { name } = req.query;
         const arraySearch = searchGames(name)
         const response = await Promise.allSettled(arraySearch)
         const filteredResponse = response.filter(resp => resp.status === 'fulfilled')
-        const DBgames = filteredResponse.pop().value.map(game => {
-            return {
-                id: game.id,
-                name: game.name,
-                background_image: game.background_image,
-                genres: game.genres.map(gen => gen.name)
-            }
-        })
-        const APIvideogames = []
+        let gameFromDb = filteredResponse.pop()
         filteredResponse.forEach((el) => {
             el.value.data.results.forEach((result => {
-                APIvideogames.push({
+                gamesArray.push({
                     id: result.id,
                     name: result.name,
                     background_image: result.background_image,
-                    genres: result.genres.map(gen => gen.name)
+                    genres: result.genres.map(gen => gen.name),
+                    rating: result.rating
                 })
             }))               
         })
-        res.json({APIvideogames, DBgames})
+        gameFromDb.value.forEach(game => {
+            gamesArray.push ({
+                id: game.id,
+                name: game.name,
+                background_image: game.background_image,
+                genres: game.genres.map(gen => gen.name),
+                rating: game.rating
+            })
+        })
+        res.json({gamesArray})
     } catch (error) {
         next(error)
     }

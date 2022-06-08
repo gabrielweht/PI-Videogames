@@ -5,12 +5,16 @@ const { Genre } = require('../db')
 const axios = require('axios') 
 
 async function createGenres() {
-    const response = (await axios.get(`${url}?key=${API_KEY}`)).data.results
-    response.forEach(async (genre) => {
-        const genres = await Genre.create({
-            name: genre.name
-        })
-    });
+    try {
+        const response = (await axios.get(`${url}?key=${API_KEY}`)).data.results
+        response.forEach(async (genre) => {
+            const genres = await Genre.create({
+                name: genre.name
+            })
+        });
+    } catch (error) {
+        next(error)
+    }
 }
 
 module.exports = {

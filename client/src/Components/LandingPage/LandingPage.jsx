@@ -4,6 +4,10 @@ import { getVideogames } from '../../Actions'
 import { useHistory } from 'react-router-dom'
 
 function Home (props){
+    // console.log(props)
+    // useEffect(() => {
+    //     props.getVideogames()
+    // }, [])
 
     let history = useHistory();
 
@@ -17,7 +21,7 @@ function Home (props){
             Bienvenido a la página de Videojuegos
         </h1>
         <button onClick={redirect}>
-            Ir a la pagina principal
+            Comenzar
         </button>
 
         {/* <img className = 'Home_Image' src = {props.videogames[0].APIvideogames[4].background_image} alt='videogame_Image'/>

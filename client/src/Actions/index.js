@@ -1,16 +1,22 @@
-import { GET_GENRES, GET_VIDEOGAMES, GET_VIDEOGAME_DETAILS, ADD_VIDEOGAME } from "./actions-types";
+import { GET_GENRES, GET_VIDEOGAMES, GET_VIDEOGAME_DETAILS, SORT, ADD_VIDEOGAME, GET_VIDEOGAMES_NAME } from "./actions-types";
 const axios = require('axios') 
 
-export function getVideogames(name) {
-    let parameter = ''
-    if(name) {
-        parameter = `?name=${name}`
-    }
+export function getVideogames() {
     return async (dispatch) => {
-        const games = await axios.get(`http://localhost:3001/videogames${parameter}`)
+        const games = await axios.get(`http://localhost:3001/videogames`)
         dispatch({
             type: GET_VIDEOGAMES,
-            payload: games.data
+            payload: games.data.gamesArray
+        })
+    }
+}
+
+export function getVideogamesByName(name) {
+    return async (dispatch) => {
+        const games = await axios.get(`http://localhost:3001/videogames?name=${name}`)
+        dispatch({
+            type: GET_VIDEOGAMES_NAME,
+            payload: games.data.gamesArray
         })
     }
 }
@@ -25,13 +31,20 @@ export function getGenres() {
     }
 }
 
-export function getVideogameDetails (id) {
-    return async (dispatch) => {
-        const game = await axios.get(`http://localhost:3001/videogames/${id}`)
-        dispatch({
-            type: GET_VIDEOGAME_DETAILS,
-            payload: game.data
-        })
+// export function getVideogameDetails (id) {
+//     return async (dispatch) => {
+//         const game = await axios.get(`http://localhost:3001/videogame/${id}`)
+//         dispatch({
+//             type: GET_VIDEOGAME_DETAILS,
+//             payload: game.data
+//         })
+//     }
+// }
+
+export function sort(order) {
+    return {
+        type: SORT,
+        payload: order
     }
 }
 
