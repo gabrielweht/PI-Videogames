@@ -15,23 +15,15 @@ export default function rootReducer(state = initialState, action) {
                 genresLoaded: action.payload
             }
         case GET_VIDEOGAMES:
-            let games = [...action.payload]
-            let array = []
-            for(var i = 0; i < Math.ceil(games.length/15) ; i++){
-                let prevValue = i * 15;
-                let postValue = prevValue + 15
-                let filteredGames = games.slice(prevValue, postValue)
-                array.push(filteredGames)
-            }
             return {
                 ...state,
-                videogamesLoaded: array,
+                videogamesLoaded: action.payload,
                 videogames: action.payload
             }
         case GET_VIDEOGAMES_NAME:
             return {
                 ...state,
-                videogamesLoaded: action.payload
+                videogamesLoaded: action.payload.slice(0, 15)
             }
         // case GET_VIDEOGAME_DETAILS:
         //     return {

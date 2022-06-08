@@ -11,8 +11,8 @@ export default function Order(){
 
     return (
         <div>
-            <span>Orden: </span>
-            <select name="Ordenar" defaultValue='Ordenar por' onChange={orderCards}>
+            <span>Ordenar: </span>
+            <select name="Ordenar" onChange={orderCards}>
                 <option value='sinOrden' selected></option>
                 <option value="ascendente">A-Z</option>
                 <option value="descendente" >Z-A</option>

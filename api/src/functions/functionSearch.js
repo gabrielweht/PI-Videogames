@@ -8,19 +8,17 @@ const axios = require('axios')
 function searchGames(name) {
     let arrayGames = [];
     let conditions = {}
-    let search = ''
     if(name) {
         conditions.where = {
             name: {
                 [Op.iLike]: `%${name}%`
             }
         }
-        search = `search=${name}&`
-        arrayGames.push(axios.get(`${url}?${search}key=${API_KEY}&page_size=15`))
+        arrayGames.push(axios.get(`${url}?search=${name}&key=${API_KEY}`))
     } else {
-        arrayGames.push(axios.get(`${url}?${search}key=${API_KEY}&page_size=40`))
+        arrayGames.push(axios.get(`${url}?key=${API_KEY}&page_size=40`))
         for(var i = 3; i < 6; i++){
-            arrayGames.push(axios.get(`${url}?${search}key=${API_KEY}&page=${i}`))
+            arrayGames.push(axios.get(`${url}?key=${API_KEY}&page=${i}`))
         }
     }
     conditions.include = {
