@@ -10,7 +10,6 @@ export default function Pagination (){
     useEffect(() => {
         dispatch(getVideogames())
     }, [dispatch])
-    
     const [ currentPage, setCurrentPage ] = useState(0)
     const [ videogamePerPage, setVideogamePerPage ] = useState(videogames.slice(0, 15))
     const [ firstValue, setFirstValue ] = useState(0)

@@ -69,7 +69,7 @@ router.post('/', async (req, res) => {
             background_image 
         })
 
-        genres.forEach(async (genre) => {
+        genres?.forEach(async (genre) => {
             const  [ searchGenre ] = await Genre.findOrCreate({
                 where:{
                     name: genre

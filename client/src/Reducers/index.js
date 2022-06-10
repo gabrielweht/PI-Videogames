@@ -1,10 +1,9 @@
-import { GET_GENRES, GET_VIDEOGAMES, GET_VIDEOGAMES_NAME, GET_VIDEOGAME_DETAILS, SORT } from "../Actions/actions-types";
+import { GET_GENRES, GET_VIDEOGAMES, GET_VIDEOGAMES_NAME, VIDEOGAME_FILTERED, SORT } from "../Actions/actions-types";
 
 const initialState = {
     genresLoaded: [],
     videogames: [],
     videogamesLoaded: [],
-    videogameDetail: {}
 }
 
 export default function rootReducer(state = initialState, action) {
@@ -25,11 +24,16 @@ export default function rootReducer(state = initialState, action) {
                 ...state,
                 videogamesLoaded: action.payload.slice(0, 15)
             }
-        // case GET_VIDEOGAME_DETAILS:
-        //     return {
-        //         ...state,
-        //         videogameDetail: action.payload
-        //     }
+        case VIDEOGAME_FILTERED:
+            let games = [...state.videogames]
+            let filteredVideogame = []
+            action.payload.forEach((el) => {
+                games.filter( g => g.genres?.includes(el)).forEach(game => filteredVideogame.push(game))
+            })
+            return {
+                ...state,
+                videogamesLoaded: filteredVideogame
+            }
         case SORT:
             let videogamesOrderer = [...state.videogames]
             if(action.payload === 'ascendente'  || action.payload === 'descendente') {

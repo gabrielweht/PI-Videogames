@@ -1,4 +1,4 @@
-import { GET_GENRES, GET_VIDEOGAMES, GET_VIDEOGAME_DETAILS, SORT, ADD_VIDEOGAME, GET_VIDEOGAMES_NAME } from "./actions-types";
+import { GET_GENRES, GET_VIDEOGAMES, VIDEOGAME_FILTERED, SORT, ADD_VIDEOGAME, GET_VIDEOGAMES_NAME } from "./actions-types";
 const axios = require('axios') 
 
 export function getVideogames() {
@@ -31,15 +31,13 @@ export function getGenres() {
     }
 }
 
-// export function getVideogameDetails (id) {
-//     return async (dispatch) => {
-//         const game = await axios.get(`http://localhost:3001/videogame/${id}`)
-//         dispatch({
-//             type: GET_VIDEOGAME_DETAILS,
-//             payload: game.data
-//         })
-//     }
-// }
+export function filteredVideogames (filters) {
+    console.log(filters)
+    return {
+        type: VIDEOGAME_FILTERED,
+        payload: filters
+    }
+}
 
 export function sort(order) {
     return {
