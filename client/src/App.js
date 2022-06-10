@@ -11,8 +11,7 @@ function App() {
       <Route path='/' exact>
         <LandingPage/>
       </Route>
-      <Route path='/videogames' exact>
-        <Videogames/>
+      <Route path='/videogames' exact component={Videogames}>
       </Route>
       <Route path='/videogames/:id' exact>
         <VideogameDetail/>

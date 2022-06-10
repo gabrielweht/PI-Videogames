@@ -1,23 +1,26 @@
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { getVideogames } from "../../../../Actions"
+import { getVideogames, setCurrent } from "../../../../Actions"
 import Videogame from "../Videogame"
 import styles from '../videogame.module.css'
 
 export default function Pagination (){
     let videogames = useSelector((state) => state.videogamesLoaded)
+    let current = useSelector((state) => state.current)
     let dispatch = useDispatch()
     useEffect(() => {
         dispatch(getVideogames())
     }, [dispatch])
-    const [ currentPage, setCurrentPage ] = useState(0)
-    const [ videogamePerPage, setVideogamePerPage ] = useState(videogames.slice(0, 15))
-    const [ firstValue, setFirstValue ] = useState(0)
+
+    const [ currentPage, setCurrentPage ] = useState(current)
+    const [ videogamePerPage, setVideogamePerPage ] = useState(videogames.slice(current, current + 15))
+    const [ firstValue, setFirstValue ] = useState(current)
     
     useEffect(() => {
+        dispatch(setCurrent(currentPage))
         setFirstValue(currentPage * 15)
         setVideogamePerPage(videogames.slice(firstValue, firstValue + 15))
-    }, [currentPage, firstValue, videogames])
+    }, [currentPage, firstValue, videogames, dispatch])
 
     function handleFirst(){
         setCurrentPage(0)
@@ -35,7 +38,6 @@ export default function Pagination (){
     
     function handleLast(){
         setCurrentPage(Math.floor(videogames.length / 15))
-
     }
 
     function handleNumber(e){

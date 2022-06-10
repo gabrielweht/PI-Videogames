@@ -4,7 +4,6 @@ import Order from "../Order/Order";
 import SearchBar from "../SearchBar/Searchbar";
 
 function NavBar() {
-    console.log('Nav renderizado')
     return (
         <div>
             <SearchBar />

@@ -1,4 +1,4 @@
-import { GET_GENRES, GET_VIDEOGAMES, VIDEOGAME_FILTERED, SORT, ADD_VIDEOGAME, GET_VIDEOGAMES_NAME } from "./actions-types";
+import { GET_GENRES, GET_VIDEOGAMES, VIDEOGAME_FILTERED, SORT, ADD_VIDEOGAME, GET_VIDEOGAMES_NAME, SET_CURRENT_PAGE } from "./actions-types";
 const axios = require('axios') 
 
 export function getVideogames() {
@@ -32,10 +32,16 @@ export function getGenres() {
 }
 
 export function filteredVideogames (filters) {
-    console.log(filters)
     return {
         type: VIDEOGAME_FILTERED,
         payload: filters
+    }
+}
+
+export function setCurrent(currentPage){
+    return {
+        type: SET_CURRENT_PAGE,
+        payload: currentPage
     }
 }
 

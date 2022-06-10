@@ -1,9 +1,11 @@
-import { GET_GENRES, GET_VIDEOGAMES, GET_VIDEOGAMES_NAME, VIDEOGAME_FILTERED, SORT } from "../Actions/actions-types";
+import { GET_GENRES, GET_VIDEOGAMES, GET_VIDEOGAMES_NAME, VIDEOGAME_FILTERED, SORT, SET_CURRENT_PAGE } from "../Actions/actions-types";
 
 const initialState = {
     genresLoaded: [],
     videogames: [],
     videogamesLoaded: [],
+    current: 0,
+    order: ''
 }
 
 export default function rootReducer(state = initialState, action) {
@@ -19,6 +21,11 @@ export default function rootReducer(state = initialState, action) {
                 videogamesLoaded: action.payload,
                 videogames: action.payload
             }
+        case SET_CURRENT_PAGE:
+            return {
+                ...state,
+                current: action.payload
+            }
         case GET_VIDEOGAMES_NAME:
             return {
                 ...state,
@@ -27,16 +34,32 @@ export default function rootReducer(state = initialState, action) {
         case VIDEOGAME_FILTERED:
             let games = [...state.videogames]
             let filteredVideogame = []
-            action.payload.forEach((el) => {
-                games.filter( g => g.genres?.includes(el)).forEach(game => filteredVideogame.push(game))
-            })
+            let filters = action.payload
+            if(action.payload.includes('created')){
+                filters = filters.filter(el => el !== 'created')
+                games = games.filter(g => typeof g.id !== 'number')
+            }
+            if(action.payload.includes('exist')){
+                filters = filters.filter(el => el !== 'exist')
+                games = games.filter(g => typeof g.id === 'number')
+            }
+            if(filters.length){
+                filters.forEach((el) => {
+                    games.filter( g => g.genres?.includes(el)).forEach(game => filteredVideogame.push(game))
+                })
+            } else {
+                filteredVideogame = games
+            }
             return {
                 ...state,
                 videogamesLoaded: filteredVideogame
             }
         case SORT:
-            let videogamesOrderer = [...state.videogames]
-            if(action.payload === 'ascendente'  || action.payload === 'descendente') {
+            let videogamesOrderer = [...state.videogamesLoaded]
+            let orderState
+            if(action.payload !== state.order) orderState = action.payload
+            else orderState = state.order
+            if(orderState === 'ascendente'  || orderState === 'descendente') {
                 videogamesOrderer.sort((a, b) =>{
                     let NameA = a.name.toLowerCase()
                     let NameB = b.name.toLowerCase()
@@ -49,7 +72,7 @@ export default function rootReducer(state = initialState, action) {
                     return 0;
                 })
             }
-            if(action.payload === 'ratingAsc'  || action.payload === 'ratingDes') {
+            if(orderState === 'ratingAsc'  || orderState === 'ratingDes') {
                 videogamesOrderer.sort((a, b) =>{
                     if (a.rating > b.rating) {
                         return action.payload === 'ratingAsc' ? 1 : -1;
@@ -62,7 +85,8 @@ export default function rootReducer(state = initialState, action) {
             }
             return {
                 ...state,
-                videogamesLoaded: videogamesOrderer
+                videogamesLoaded: videogamesOrderer,
+                order: action.payload
             }
         default:
             return state

@@ -7,6 +7,11 @@ export default function FilterWindow ({active, setActive}){
     const [ filters, setFilters ] = useState([])
     let genres = useSelector((state) => state.genresLoaded)
     let dispatch = useDispatch()
+
+    useEffect(() => {
+        dispatch(getGenres())
+    }, [dispatch])
+
     const addFilter = useCallback((e) => {
         if(e.target.checked) setFilters([...filters, e.target.value])
         else {
@@ -15,28 +20,29 @@ export default function FilterWindow ({active, setActive}){
         }
     }, [filters])
 
+    const isCheck = useCallback((name)=>{
+        if (filters.length){
+            var check  = filters.includes(name)
+        }
+        return check
+    },[filters]) 
+    
+
     let inputs = useMemo(() => {
-        return genres.map((el) => {
-            if (filters.length){
-                var check  = filters.includes(el.name)
-            }
-        return <label>
+        return genres.map((el, index) => {
+        return (<label key={index}>
                 <input 
                     type="checkbox" 
                     name={el.name} 
                     id={el.id} 
                     value={el.name}
                     onClick={addFilter}
-                    checked= {check}
+                    defaultChecked= {isCheck(el.name)}
                 />
                     {el.name}
-            </label>
+                </label>)
     })
-    }, [genres, addFilter, filters])
-
-    useEffect(() => {
-        dispatch(getGenres())
-    }, [dispatch])
+    }, [genres, addFilter, isCheck])
 
     function applyFilter(e){
         e.preventDefault()
@@ -44,7 +50,7 @@ export default function FilterWindow ({active, setActive}){
         setActive(!active)
     }
 
-    function deleteFilters() {
+    function deleteFilters(e) {
         dispatch(getVideogames())
         setFilters([])
         setActive(!active)
@@ -57,9 +63,9 @@ export default function FilterWindow ({active, setActive}){
                 <div className={style.card}> 
                     <button onClick={() => setActive(!active)}>X</button>
                     <form>
-                        <label>GÉNERO
+                        <div>GÉNERO
                             {inputs.map(el => el)}
-                        </label>
+                        </div>
                         <br/>
                         <span>ORIGEN</span>
                         <br/>
@@ -69,6 +75,7 @@ export default function FilterWindow ({active, setActive}){
                             name="created" 
                             value='created'
                             onClick={addFilter}
+                            defaultChecked= {isCheck('created')}
                             />
                             Creado
                         </label>
@@ -80,6 +87,7 @@ export default function FilterWindow ({active, setActive}){
                                 id="" 
                                 value='exist'
                                 onClick={addFilter}
+                                defaultChecked= {isCheck('exist')}
                                 />
                             Existente
                         </label>
