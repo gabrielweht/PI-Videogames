@@ -56,7 +56,7 @@ router.get('/:idVideogame', async (req, res, next) =>{
     }
 })
 
-router.post('/', async (req, res) => {
+router.post('/', async (req, res, next) => {
     try {
         const { name, description, platforms, genres, released, rating, background_image } = req.body
         if (!name || !description || !platforms) return res.status(400).send('Faltan enviar datos obligatorios')
@@ -78,7 +78,7 @@ router.post('/', async (req, res) => {
             game.addGenre(searchGenre)
         })
 
-        res.send(game)
+        res.send('El juego fue creado correctamente')
     } catch (error) {
         next(error)
     }

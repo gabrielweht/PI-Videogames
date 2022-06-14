@@ -1,17 +1,20 @@
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { getVideogames, setCurrent } from "../../../../Actions"
+import { getVideogames, setCurrent} from "../../../../Actions"
+import Loading from "../../../Loading/Loading"
 import Videogame from "../Videogame"
 import styles from '../videogame.module.css'
 
 export default function Pagination (){
     let videogames = useSelector((state) => state.videogamesLoaded)
     let current = useSelector((state) => state.current)
+    let order = useSelector((state) => state.order)
+    
     let dispatch = useDispatch()
     useEffect(() => {
         dispatch(getVideogames())
     }, [dispatch])
-
+    
     const [ currentPage, setCurrentPage ] = useState(current)
     const [ videogamePerPage, setVideogamePerPage ] = useState(videogames.slice(current, current + 15))
     const [ firstValue, setFirstValue ] = useState(current)
@@ -20,7 +23,7 @@ export default function Pagination (){
         dispatch(setCurrent(currentPage))
         setFirstValue(currentPage * 15)
         setVideogamePerPage(videogames.slice(firstValue, firstValue + 15))
-    }, [currentPage, firstValue, videogames, dispatch])
+    }, [currentPage, firstValue, videogames, dispatch, order])
 
     function handleFirst(){
         setCurrentPage(0)
@@ -63,7 +66,7 @@ export default function Pagination (){
                         genres = {videogame.genres}
                     />
                     )
-                }) : <div> Cargando... </div>
+                }) : <Loading/>
                 }
                 {videogamePerPage.length > 0 ? <nav className="navPag">
                     <button onClick={handleFirst}>First</button>

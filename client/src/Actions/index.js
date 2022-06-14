@@ -1,4 +1,4 @@
-import { GET_GENRES, GET_VIDEOGAMES, VIDEOGAME_FILTERED, SORT, ADD_VIDEOGAME, GET_VIDEOGAMES_NAME, SET_CURRENT_PAGE } from "./actions-types";
+import { GET_GENRES, GET_VIDEOGAMES, SET_ORDER, VIDEOGAME_FILTERED, SORT, ADD_VIDEOGAME, GET_VIDEOGAMES_NAME, SET_CURRENT_PAGE } from "./actions-types";
 const axios = require('axios') 
 
 export function getVideogames() {
@@ -48,6 +48,13 @@ export function setCurrent(currentPage){
 export function sort(order) {
     return {
         type: SORT,
+        payload: order
+    }
+}
+
+export function setOrder(order){
+    return {
+        type: SET_ORDER,
         payload: order
     }
 }

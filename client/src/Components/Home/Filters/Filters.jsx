@@ -12,9 +12,7 @@ export default function Filters() {
             </button>
             <FilterWindow active={isActive}
             setActive={setIsActive}
-            >
-
-            </FilterWindow>
+            />
         </div>
     )
 }

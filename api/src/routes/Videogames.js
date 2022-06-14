@@ -22,17 +22,20 @@ router.get('/', async (req, res, next) => {
                     name: result.name,
                     background_image: result.background_image,
                     genres: result.genres.map(gen => gen.name),
-                    rating: result.rating
+                    rating: result.rating,
+                    platforms: result.platforms.map(platform => platform.platform.name)
                 })
             }))               
         })
+        
         gameFromDb.value.forEach(game => {
             gamesArray.push ({
                 id: game.id,
                 name: game.name,
                 background_image: game.background_image,
                 genres: game.genres.map(gen => gen.name),
-                rating: game.rating
+                rating: game.rating,
+                platforms: game.platforms
             })
         })
         res.json({gamesArray})
