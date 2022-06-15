@@ -1,18 +1,15 @@
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { setOrder, sort } from "../../../Actions"
+import { sort } from "../../../Actions"
 
 
 export default function Order(){
     let order = useSelector((state) => state.order)
     let dispatch = useDispatch()
-    const [ actualOrder, setActualOrder ] = useState('sinOrden')
-
-    
+    const [ actualOrder, setActualOrder ] = useState(order)
 
     useEffect(() =>{
         dispatch(sort(actualOrder))
-        dispatch(setOrder(actualOrder))
     }, [dispatch, actualOrder])
 
     function orderCards(e){
@@ -23,7 +20,7 @@ export default function Order(){
         if(order === value) {
             return true
         }
-        else return false
+        return false
     }
 
     return (

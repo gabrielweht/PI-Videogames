@@ -4,7 +4,7 @@ import { filteredVideogames, getGenres, getVideogames } from "../../../Actions";
 import style from './filter.module.css'
 
 export default function FilterWindow ({active, setActive}){
-    const [ filters, setFilters ] = useState([])
+    const [ filters, setFilters ] = useState(useSelector(state => state.filters))
     let genres = useSelector((state) => state.genresLoaded)
     let dispatch = useDispatch()
 
@@ -51,7 +51,8 @@ export default function FilterWindow ({active, setActive}){
     }
 
     function deleteFilters(e) {
-        dispatch(getVideogames())
+        e.preventDefault()
+        dispatch(filteredVideogames([]))
         setFilters([])
         setActive(!active)
     }

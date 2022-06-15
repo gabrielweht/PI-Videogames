@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { getVideogames, setCurrent} from "../../../../Actions"
+import { filteredVideogames, getVideogames, setCurrent, sort} from "../../../../Actions"
 import Loading from "../../../Loading/Loading"
 import Videogame from "../Videogame"
 import styles from '../videogame.module.css'
@@ -8,12 +8,14 @@ import styles from '../videogame.module.css'
 export default function Pagination (){
     let videogames = useSelector((state) => state.videogamesLoaded)
     let current = useSelector((state) => state.current)
-    let order = useSelector((state) => state.order)
-    
+    let filters = useSelector(state => state.filters)
+    let order = useSelector(state => state.order)
     let dispatch = useDispatch()
+
     useEffect(() => {
         dispatch(getVideogames())
     }, [dispatch])
+
     
     const [ currentPage, setCurrentPage ] = useState(current)
     const [ videogamePerPage, setVideogamePerPage ] = useState(videogames.slice(current, current + 15))
@@ -23,7 +25,7 @@ export default function Pagination (){
         dispatch(setCurrent(currentPage))
         setFirstValue(currentPage * 15)
         setVideogamePerPage(videogames.slice(firstValue, firstValue + 15))
-    }, [currentPage, firstValue, videogames, dispatch, order])
+    }, [currentPage, firstValue, videogames, dispatch])
 
     function handleFirst(){
         setCurrentPage(0)

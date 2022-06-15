@@ -1,11 +1,12 @@
-import { GET_GENRES, GET_VIDEOGAMES, SET_ORDER, GET_VIDEOGAMES_NAME, VIDEOGAME_FILTERED, SORT, SET_CURRENT_PAGE } from "../Actions/actions-types";
+import { GET_GENRES, GET_VIDEOGAMES, GET_VIDEOGAMES_NAME, VIDEOGAME_FILTERED, SORT, SET_CURRENT_PAGE } from "../Actions/actions-types";
 
 const initialState = {
     genresLoaded: [],
     videogames: [],
     videogamesLoaded: [],
     current: 0,
-    order: 'sinOrden'
+    order: 'sinOrden',
+    filters: []
 }
 
 export default function rootReducer(state = initialState, action) {
@@ -52,15 +53,11 @@ export default function rootReducer(state = initialState, action) {
             }
             return {
                 ...state,
-                videogamesLoaded: filteredVideogame
-            }
-        case SET_ORDER:
-            return {
-                ...state,
-                order: action.payload
+                videogamesLoaded: filteredVideogame,
+                filters: action.payload
             }
         case SORT:
-            let videogamesOrderer = [...state.videogamesLoaded]
+            let videogamesOrderer = [...state.videogames]
             let orderState
             if(action.payload !== state.order) orderState = action.payload
             else orderState = state.order
@@ -91,6 +88,7 @@ export default function rootReducer(state = initialState, action) {
             return {
                 ...state,
                 videogamesLoaded: videogamesOrderer,
+                order: action.payload
             }
         default:
             return state

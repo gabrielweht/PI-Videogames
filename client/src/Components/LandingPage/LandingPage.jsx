@@ -1,13 +1,8 @@
-import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import { getVideogames } from '../../Actions'
 import { useHistory } from 'react-router-dom'
 
-function Home (props){
-    // console.log(props)
-    // useEffect(() => {
-    //     props.getVideogames()
-    // }, [])
+function Home (){
 
     let history = useHistory();
 

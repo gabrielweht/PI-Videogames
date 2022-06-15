@@ -1,6 +1,11 @@
 import { useState } from "react"
 import axios from 'axios'
 import Platforms from "./Platforms"
+import Genres from "./Genres"
+import { ArraysComponents, FirstComponent, OtherComponents } from "./FormComponents"
+import { useHistory } from "react-router-dom"
+
+
 export function validate(input){
     let errors = {}
     if(!input.name) errors.name = 'El nombre del videojuego es obligatorio'
@@ -23,6 +28,7 @@ export default function PostGame(){
     const [ warning, setWarning ] = useState('')
     const [ errors, setErrors ] = useState({})
     const [ platformActive, setPlatformActive ] = useState(false)
+    const [ genreActive, setGenreActive ] = useState(false)
 
     function handleInputChange(e){
         const newInput = {
@@ -46,10 +52,19 @@ export default function PostGame(){
         setErrors(validate(inputs))
             try {           
                 const response = await axios.post('http://localhost:3001/videogame', inputs)
-                if(response.data) setCreated(response.data)
+                if(response.data) {
+                    setCreated(response.data)
+                    setWarning('')
+                }
             } catch (error) {
                 setWarning(error.response.data)
             }  
+    }
+
+    let history = useHistory();
+
+    const redirect = () => {
+        history.push('/videogames')
     }
 
     return (
@@ -58,75 +73,38 @@ export default function PostGame(){
                 Creá tu juego
             </h1>
             {warning && <p>{warning}</p>}
-            {created ? <div>{created}</div> : <form onSubmit={postGame}>
-                <div>
-                    <label>Name*</label>
-                    <input 
-                    className={errors.name && 'danger'}
-                    type='text' 
-                    name='name' 
-                    onChange={handleInputChange}
-                    />
-                    {errors.name && (<p className='danger'>{errors.name}</p>)}
-                </div>
-                <div>
-                    <label>Description*</label>
-                    <textarea  
-                    className={errors.description && 'danger'}
-                    name='description' 
-                    onChange={handleInputChange}/>
-                    {errors.description && (<p className='danger'>{errors.description}</p>)}
-                </div>
-                <div>
-                    <button 
-                        className={errors.platforms && 'danger'}
-                        onClick={(e) => {
-                            e.preventDefault()
-                            setPlatformActive(!platformActive)}}>
-                    Plataformas
-                    </button>
-                    {errors.platforms && (<p className='danger'>{errors.platforms}</p>)}
-                </div>
-                <div>
-                    <label>Genres
-                    <input
-                        type='checkbox'    
-                        name='genres'
-                        value='Adventure'
-                        onClick={handleArrays}/>Adventure
-                    </label>
-                </div>
-                <div>
-                    <label>Released</label>
-                    <input 
-                        type='date' 
-                        name='released'
-                        onChange={handleInputChange}
-                        />
-                </div>
-                <div>
-                    <label>Rating</label>
-                    <input 
-                        type='number' 
-                        min='1' 
-                        max='5' 
-                        step='0.1' 
-                        name='rating'
-                        onChange={handleInputChange}/>
-                </div>
-                <div>
-                    <label>Imagen</label>
-                    <input 
-                        type='url' 
-                        name='background_image'
-                        onChange={handleInputChange}/>
-                </div>
-                <input type='submit' value='Crear Juego' />
+            {created ? 
+            <>
+                <div>{created}</div> 
+                <button onClick={redirect}>Ver Videojuegos</button>
+            </>
+            : 
+            <form onSubmit={postGame}>
+                <FirstComponent 
+                    errors={errors}
+                    handleChange={handleInputChange}
+                />
+                <ArraysComponents 
+                    inputs={inputs}
+                    errors={errors}
+                    setPlatformActive={setPlatformActive}
+                    platformActive={platformActive}
+                    setGenreActive={setGenreActive}
+                    genreActive={genreActive}
+                />
+                <OtherComponents handleChange={handleInputChange}/>
             </form>}
             <Platforms 
                 active={platformActive} 
                 setActive={setPlatformActive}
                 handleClick={handleArrays}
+                platformSelected={inputs.platforms}
+            />
+            <Genres 
+                active={genreActive} 
+                setActive={setGenreActive}
+                handleClick={handleArrays}
+                genreSelected={inputs.genres}
             />
         </div>
     )
