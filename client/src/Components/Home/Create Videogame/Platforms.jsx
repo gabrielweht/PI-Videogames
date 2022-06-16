@@ -6,8 +6,9 @@ import platform from './modal.module.css'
 
 export default function Platforms({active, setActive, handleClick, platformSelected}){
     const videogames = useSelector(state => state.videogames)
-    const platforms = []
+    let platforms = []
     const [ platformsSelected, setPlatfomsSelected ] = useState([])
+    const [ newPlatform, setNewPlatform ] = useState('')
 
     let dispatch = useDispatch()
     useEffect(() => {
@@ -18,17 +19,22 @@ export default function Platforms({active, setActive, handleClick, platformSelec
         el.platforms.forEach(pl => {
             if(!platforms.includes(pl)) platforms.push(pl)
         })
-        platforms.sort((a, b) =>{
-            let NameA = a.toLowerCase()
-            let NameB = b.toLowerCase()
-            if (NameA > NameB) {
-                return 1 
-            }
-            if (NameA < NameB) {
-                return -1
-            }
-            return 0;
-        })
+    })
+
+    platformSelected?.forEach(pl => {
+        if(!platforms.includes(pl)) platforms.push(pl)
+    })
+
+    platforms.sort((a, b) =>{
+        let NameA = a.toLowerCase()
+        let NameB = b.toLowerCase()
+        if (NameA > NameB) {
+            return 1 
+        }
+        if (NameA < NameB) {
+            return -1
+        }
+        return 0;
     })
 
     const isCheck = useCallback((plat)=>{
@@ -45,6 +51,15 @@ export default function Platforms({active, setActive, handleClick, platformSelec
             setPlatfomsSelected(deletePlatform)
         }
     }, [platformsSelected])
+
+    function pushNewPlatform (e) {
+        e.preventDefault()
+        if(newPlatform === '') return;
+        if(!platformsSelected.includes(newPlatform)) {
+            setPlatfomsSelected([...platformsSelected, newPlatform])
+            setNewPlatform('')
+        }
+    }
 
     function addPlatforms(e){
         e.preventDefault()
@@ -67,6 +82,9 @@ export default function Platforms({active, setActive, handleClick, platformSelec
                             onClick={pushPlatform}
                             defaultChecked={isCheck(plat)}
                         />{plat}</label>)})}
+                        <br/>
+                        <input type='text' value={newPlatform} onChange={(e) => setNewPlatform(e.target.value)} placeholder='Escribe una plataforma'/>
+                        <button onClick={pushNewPlatform}>Agregar Plataforma</button>
                         <br/>
                         <button onClick={addPlatforms}>Listo</button>
                     </div>
