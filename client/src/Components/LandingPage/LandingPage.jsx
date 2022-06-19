@@ -1,8 +1,7 @@
-import { connect } from 'react-redux'
-import { getVideogames } from '../../Actions'
 import { useHistory } from 'react-router-dom'
+import styles from './landingPage.module.css'
 
-function Home (){
+export default function Home (){
 
     let history = useHistory();
 
@@ -13,30 +12,16 @@ function Home (){
     return (
     <div >
         <h1>
-            Bienvenido a la página de Videojuegos
+            Videogames
         </h1>
+        <img 
+        className={styles.imageLanding}
+        src="https://i.pinimg.com/originals/26/c2/93/26c2932cd4beff0f3cc992391bd75922.gif" 
+        alt="page_gif" />
         <button onClick={redirect}>
             Comenzar
         </button>
-
-        {/* <img className = 'Home_Image' src = {props.videogames[0].APIvideogames[4].background_image} alt='videogame_Image'/>
-    */}
-
     </div>
     )
     
 }
-
-function mapStateToProp(state){
-    return {
-        videogames: state.videogamesLoaded
-    }
-}
-
-function mapDispatchToProps(dispatch) {
-    return {
-        getVideogames: game => dispatch(getVideogames(game))
-    };
-}
-
-export default connect(mapStateToProp, mapDispatchToProps)(Home)

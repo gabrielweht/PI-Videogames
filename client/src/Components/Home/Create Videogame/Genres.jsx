@@ -6,6 +6,7 @@ import genre from './modal.module.css'
 
 export default function Genres({ active, setActive, handleClick, genreSelected}){
     let genresLoaded = useSelector(state => state.genresLoaded)
+    let genres = []
     let dispatch = useDispatch()
 
     useEffect(() => {
@@ -13,7 +14,28 @@ export default function Genres({ active, setActive, handleClick, genreSelected})
     }, [dispatch])
 
     const [ genresSelected, setGenresSelected ] = useState([])
+    const [ newGenre, setNewGenre ] = useState('')
+
+    genresLoaded.forEach((genre) => {
+        genres.push(genre.name)
+    })
     
+    genreSelected?.forEach((gen) => {
+        if(!genres.includes(gen)) genres.push(gen)
+    })
+
+    genres.sort((a, b) =>{
+        let NameA = a.toLowerCase()
+        let NameB = b.toLowerCase()
+        if (NameA > NameB) {
+            return 1 
+        }
+        if (NameA < NameB) {
+            return -1
+        }
+        return 0;
+    })
+
     const isCheck = useCallback((genre)=>{
         if (genreSelected.length){
             var check  = genreSelected.includes(genre)
@@ -29,6 +51,14 @@ export default function Genres({ active, setActive, handleClick, genreSelected})
         }
     }, [genresSelected])
 
+    function pushNewGenre(e){
+        e.preventDefault()
+        if(!genresSelected.includes(newGenre)) {
+            setGenresSelected([...genresSelected, newGenre])
+            setNewGenre('')
+        }
+    }
+
     function addGenres(e){
         e.preventDefault()
         handleClick(genresSelected, 'genres')
@@ -43,14 +73,17 @@ export default function Genres({ active, setActive, handleClick, genreSelected})
                 <div className={genre.card}>
                     <button onClick={() => setActive(!active)}>X</button>
                     <br/>
-                    {genresLoaded.map((genre) => {
-                    return (<label key={genre.id}>
+                    {genres.map((genre, index) => {
+                    return (<label key={index}>
                         <input 
                             type='checkbox'  
-                            value={genre.name}
+                            value={genre}
                             onClick={pushGenre}
-                            defaultChecked={isCheck(genre.name)}
-                    />{genre.name}</label>)})}
+                            defaultChecked={isCheck(genre)}
+                    />{genre}</label>)})}
+                    <br/>
+                    <input type='text' value={newGenre} onChange={(e) => setNewGenre(e.target.value)} placeholder='Escribe una plataforma'/>
+                    <button onClick={pushNewGenre}>Agregar Género</button>
                     <br/>
                     <button onClick={addGenres}>Listo</button>
                 </div>

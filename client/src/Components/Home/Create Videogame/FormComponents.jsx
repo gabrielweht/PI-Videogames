@@ -31,7 +31,7 @@ export function ArraysComponents (params){
                     <span>Plataforas*</span>
                     {inputs.platforms.length > 0 ? 
                     <>
-                        {inputs.platforms.map((pl, index) => <span key={index}>{pl}</span>)}
+                        <span >{inputs.platforms.join(', ')}</span>
                         <button 
                             className={errors.platforms && 'danger'}
                             onClick={(e) => {
@@ -53,7 +53,7 @@ export function ArraysComponents (params){
                     <span>Genres</span>
                     {inputs.genres.length > 0 ? 
                     <>
-                        {inputs.genres.map((gen, index) => <span key={index}>{gen}</span>)}
+                        <span >{inputs.genres.join(', ')}</span>
                         <button 
                             onClick={(e) => {
                                 e.preventDefault()

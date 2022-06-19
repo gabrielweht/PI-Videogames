@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { filteredVideogames, getGenres, getVideogames } from "../../../Actions";
+import { filteredVideogames, getGenres } from "../../../Actions";
 import style from './filter.module.css'
 
 export default function FilterWindow ({active, setActive}){
