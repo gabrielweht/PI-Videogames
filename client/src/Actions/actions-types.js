@@ -6,6 +6,7 @@ const ADD_VIDEOGAME = 'ADD_VIDEOGAME';
 const SORT = 'SORT';
 const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE'
 const SET_ORDER = 'SET_ORDER'
+const CLEAN_UP = 'CLEAN_UP'
 
 export {
     GET_GENRES,
@@ -15,5 +16,6 @@ export {
     ADD_VIDEOGAME,
     SORT,
     SET_CURRENT_PAGE,
-    SET_ORDER
+    SET_ORDER,
+    CLEAN_UP
 }

@@ -10,17 +10,17 @@ export default function Home (){
     }
 
     return (
-    <div >
-        <h1>
-            Videogames
-        </h1>
-        <img 
-        className={styles.imageLanding}
-        src="https://i.pinimg.com/originals/26/c2/93/26c2932cd4beff0f3cc992391bd75922.gif" 
-        alt="page_gif" />
-        <button onClick={redirect}>
-            Comenzar
-        </button>
+    <div className={styles.landing}>
+        <div className={styles.card}>
+            <h1 className={styles.title}>
+                Videogames
+            </h1>
+            <button 
+            className={styles.btn}
+            onClick={redirect}>
+                Comenzar
+            </button>
+        </div>
     </div>
     )
     

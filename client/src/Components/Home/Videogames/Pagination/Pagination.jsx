@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { filteredVideogames, getVideogames, setCurrent, sort} from "../../../../Actions"
+import { cleanUp, filteredVideogames, getVideogames, setCurrent, sort} from "../../../../Actions"
 import Loading from "../../../Loading/Loading"
 import Videogame from "../Videogame"
 import styles from '../videogame.module.css'
@@ -14,6 +14,10 @@ export default function Pagination (){
 
     useEffect(() => {
         dispatch(getVideogames())
+
+        return () => {
+            dispatch(cleanUp())
+        }
     }, [dispatch])
 
     

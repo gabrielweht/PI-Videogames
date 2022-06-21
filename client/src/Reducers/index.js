@@ -1,4 +1,4 @@
-import { GET_GENRES, GET_VIDEOGAMES, GET_VIDEOGAMES_NAME, VIDEOGAME_FILTERED, SORT, SET_CURRENT_PAGE } from "../Actions/actions-types";
+import { GET_GENRES, GET_VIDEOGAMES, CLEAN_UP, GET_VIDEOGAMES_NAME, VIDEOGAME_FILTERED, SORT, SET_CURRENT_PAGE } from "../Actions/actions-types";
 
 const initialState = {
     genresLoaded: [],
@@ -89,6 +89,12 @@ export default function rootReducer(state = initialState, action) {
                 ...state,
                 videogamesLoaded: videogamesOrderer,
                 order: action.payload
+            }
+        case CLEAN_UP:
+            return{
+                ...state,
+                videogames: [],
+                videogamesLoaded: []
             }
         default:
             return state

@@ -1,12 +1,12 @@
-import { GET_GENRES, GET_VIDEOGAMES, VIDEOGAME_FILTERED, SORT, ADD_VIDEOGAME, GET_VIDEOGAMES_NAME, SET_CURRENT_PAGE } from "./actions-types";
+import { GET_GENRES, GET_VIDEOGAMES, CLEAN_UP, VIDEOGAME_FILTERED, SORT, ADD_VIDEOGAME, GET_VIDEOGAMES_NAME, SET_CURRENT_PAGE } from "./actions-types";
 const axios = require('axios') 
 
-export function getVideogames() {
+export function getVideogames(order, filters) {
     return async (dispatch) => {
         const games = await axios.get(`http://localhost:3001/videogames`)
         dispatch({
             type: GET_VIDEOGAMES,
-            payload: games.data.gamesArray
+            payload: games.data.gamesArray,
         })
     }
 }
@@ -59,5 +59,11 @@ export function addVideogame (body){
             type: ADD_VIDEOGAME,
             payload: createGame.data
         })
+    }
+}
+
+export function cleanUp(){
+    return {
+        type: CLEAN_UP
     }
 }
