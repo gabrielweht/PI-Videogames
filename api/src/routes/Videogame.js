@@ -59,7 +59,7 @@ router.get('/:idVideogame', async (req, res, next) =>{
 router.post('/', async (req, res, next) => {
     try {
         const { name, description, platforms, genres, released, rating, background_image } = req.body
-        if (!name || !description || !platforms) return res.status(400).send('Faltan enviar datos obligatorios')
+        if (!name || !description || !platforms.length) return res.status(400).send('Faltan enviar datos obligatorios')
         const game = await Videogame.create({
             name,
             description, 

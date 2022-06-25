@@ -1,0 +1,123 @@
+.bgr {
+    background-image: url('https://wallpaperaccess.com/full/982099.jpg');
+    background-repeat: no-repeat;
+    width: 100%;
+    top: 0;
+    left: 0;
+    background-size: 102% 100%;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    display: flex;
+    justify-content: center;
+}
+
+.component {
+    background-color: rgb(228, 231, 229, 0.7);
+    top: 0;
+    padding: 2rem 2rem 2rem 2rem;
+    width: 50vw;
+    margin: 2rem 0 2.7rem 0;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.title {
+    margin: 0 0 10px 0;
+}
+
+.form {
+    margin: 10px;
+    font-size: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.divs {
+    margin: 10px;
+}
+
+.divArr {
+    margin: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 20rem;
+}
+
+.join {
+    text-align: center;
+}
+
+.btn {
+    font-size: 1rem;
+    border: 2px solid black;
+    border-radius: 5px;
+    background-color: transparent;
+    width: 6rem;
+    height: 2rem;
+    margin: .5rem;
+}
+.btn:hover {
+    cursor: pointer;
+    transform: translate(0, -1px);
+}
+
+.btnDanger {
+    font-size: 1rem;
+    border: 2px solid red;
+    color: red;
+    border-radius: 5px;
+    background-color: transparent;
+    width: 6rem;
+    height: 2rem;
+    margin: 5px;
+}
+
+.btnDanger:hover {
+    cursor: pointer;
+    transform: translate(0, -1px);
+}
+
+.btnSubmit {
+    font-size: 1rem;
+    background-color: #064B68;
+    color: #CFEFFC;
+    width: 9rem;
+    height: 3rem;
+    border: none;
+    border-radius: 8px;
+    margin: 1rem;
+}
+
+.btnSubmit:hover {
+    cursor: pointer;
+    width: 9.5rem;
+    height: 3.5rem;
+    margin: .75rem;
+}
+
+.btnBack {
+    font-size: 1rem;
+    background-color: #064B68;
+    color: #CFEFFC;
+    width: 8rem;
+    height: 3rem;
+    border: none;
+    border-radius: 8px;
+    margin: 2rem;
+    position: fixed;
+}
+
+.btnBack:hover {
+    cursor: pointer;
+    width: 8.5rem;
+    height: 3.5rem;
+    margin: 1.75rem;
+}
