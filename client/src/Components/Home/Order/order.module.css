@@ -1,0 +1,22 @@
+.order {
+    grid-column: 4/5;
+    grid-row: 1;
+}
+
+.name {
+    color: #E4E7E5;
+}
+
+.selection {
+    background-color: #E4E7E5;
+    width: 130px;
+    height: 20px;
+    border: none;
+    border-radius: 10px;
+    outline: none;
+    padding: 0px 5px;
+}
+
+.selection:hover {
+    cursor: pointer;
+}

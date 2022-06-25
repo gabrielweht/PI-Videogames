@@ -4,7 +4,7 @@ import NavBar from "../NavBar/NavBar";
 import Pagination from "./Pagination/Pagination";
 import styles from './videogame.module.css'
 
-export default function Videogames (props){  
+export default function Videogames (){  
     let history = useHistory();
 
     const redirect = () => {
@@ -12,12 +12,13 @@ export default function Videogames (props){
     }
 
     return (
-        <div className={styles.bgr}>
-            <NavBar />
-            <Pagination props={props}/>
-            <button onClick={redirect} className={styles.btn}>
-                Add new Game
-            </button>
-        </div>
+            <div className={styles.bgr}>
+                <NavBar />
+                <Pagination />
+                <button onClick={redirect} className={styles.btn}>
+                    Add new Game
+                </button>
+                <footer></footer>
+            </div>
     )
 }

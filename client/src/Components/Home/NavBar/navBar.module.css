@@ -1,0 +1,12 @@
+.navBar {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr) 30vw repeat(2, 1fr);
+    grid-template-rows: repeat(1, 1fr);
+    height: 5rem;
+    position: fixed;
+    top: 0;
+    width: 100vw;
+    align-items: center;
+    justify-items: center;
+    background-color: #064B68;
+}

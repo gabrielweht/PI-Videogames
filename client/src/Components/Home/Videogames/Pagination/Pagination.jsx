@@ -14,7 +14,7 @@ export default function Pagination (){
 
     useEffect(() => {
         dispatch(getVideogames())
-
+        window.scroll(0, 0)
         return () => {
             dispatch(cleanUp())
         }
@@ -32,37 +32,49 @@ export default function Pagination (){
     }, [currentPage, firstValue, videogames, dispatch])
 
     function handleFirst(){
+        
         setCurrentPage(0)
+        window.scroll(0, 0)
     }
 
     function handleNext(){
         if(currentPage === Math.floor(videogames.length / 15)) return;
         setCurrentPage(currentPage + 1)
+        window.scroll(0, 0)
     }
+
     function handlePrev(){
         if(currentPage === 0) return;
         setCurrentPage(currentPage - 1)
+        window.scroll(0, 0)
     }
     
     
     function handleLast(){
         setCurrentPage(Math.floor(videogames.length / 15))
+        window.scroll(0, 0)
     }
 
     function handleNumber(e){
         setCurrentPage(e.target.value - 1)
+        window.scroll(0, 0)
     }
 
     function createButton(){
         let btn = []
         for(var i = 1; i <= Math.ceil((videogames.length - 1) / 15); i++){
-                btn.push(<button key={i} value={i} onClick={handleNumber}>{i}</button>)
+                btn.push(<button 
+                    className={currentPage === i - 1 ? styles.btnPagActive : styles.btnPag} 
+                    key={i} 
+                    value={i} 
+                    onClick={handleNumber}>{i}</button>)
         }
         return btn
     }
 
     return (
-        <div className={styles.cards}>
+        <>
+            <div className={styles.cards}>
                 {videogamePerPage.length > 0 ? videogamePerPage.map((videogame, index) => {
                     return (<Videogame
                         key={index} 
@@ -74,14 +86,23 @@ export default function Pagination (){
                     )
                 }) : <Loading/>
                 }
-                {videogamePerPage.length > 0 ? <nav className="navPag">
-                    <button onClick={handleFirst}>First</button>
-                    <button onClick={handlePrev}>Previous</button>
+                </div>
+                {videogamePerPage.length > 0 ? <nav className={styles.navPag}>
+                    <button 
+                    className={styles.btnPag}
+                    onClick={handleFirst}>{'<<'}</button>
+                    <button 
+                    className={styles.btnPag}
+                    onClick={handlePrev}>{'<'}</button>
                     {createButton().map(el => el)}
-                    <button onClick={handleNext}>Next</button>
-                    <button onClick={handleLast}>Last</button>
+                    <button 
+                    className={styles.btnPag}
+                    onClick={handleNext}>{'>'}</button>
+                    <button 
+                    className={styles.btnPag}
+                    onClick={handleLast}>{'>>'}</button>
                 </nav>
-                : <div></div>}
-            </div>
+                : <></>}
+        </>        
     )
 }

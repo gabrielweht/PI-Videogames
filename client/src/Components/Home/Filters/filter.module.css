@@ -1,3 +1,24 @@
+.filter {
+    grid-column: 5/6;
+    grid-row: 1;
+}
+
+.btn {
+    border: none;
+    border-radius: 5px;
+    background-color: #E4E7E5;
+    color: #064B68;
+    width: 90px;
+    height: 30px;
+    font-size: 15px;
+}
+
+.btn:hover {
+    cursor: pointer;
+    width: 92px;
+    height: 32px;
+}
+
 .container {
     background: rgb(0, 0, 0, 0.5);
     width: 100vw;
@@ -9,10 +30,63 @@
     justify-content: flex-end;
 }
 
-.card{
+.modal{
     width: 500px;
+    height: 100vh;
     min-height: 100px;
-    background-color: #fff;
-    border-radius: 5px;
-
+    background-color: #DFDBF0  ;
 }
+
+.btnX {
+    background-color: #064B68;
+    color: #DFDBF0;
+    height: 2rem;
+    width: 2rem;
+    border: none;
+    border-radius: 5px;
+    margin: 5px;
+}
+
+.divLabels {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    flex-direction: column;
+    height: 48vh;
+}
+
+.divOrigin {
+    display: flex;
+    justify-content: space-around;
+}
+
+.checkbox {
+    margin: 13px 20px 13px 10px;
+}
+
+.name {
+    display: flex;
+    justify-content: center;
+    margin: 15px;
+}
+
+.btnModal {
+    background-color: #064B68;
+    color: #DFDBF0;
+    height: 2rem;
+    width: 10rem;
+    border: none;
+    border-radius: 5px;
+}
+
+.divBtn {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin: 50px 0;
+}
+
+
+
+
+

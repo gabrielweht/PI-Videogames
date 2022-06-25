@@ -30,8 +30,8 @@ export default function FilterWindow ({active, setActive}){
 
     let inputs = useMemo(() => {
         return genres.map((el, index) => {
-        return (<label key={index}>
-                <input 
+        return (<label key={index} className={style.checkbox}>
+                <input
                     type="checkbox" 
                     name={el.name} 
                     id={el.id} 
@@ -61,39 +61,50 @@ export default function FilterWindow ({active, setActive}){
         <div >
             { active &&
             <div className={style.container}>
-                <div className={style.card}> 
-                    <button onClick={() => setActive(!active)}>X</button>
+                <div className={style.modal}> 
+                    <button onClick={() => setActive(!active)}
+                    className={style.btnX}
+                    >X</button>
+                    <div className={style.name}>FILTRAR POR</div>
                     <form>
-                        <div>GÉNERO
+                        <div className={style.name}>GÉNERO</div>
+                        <div className={style.divLabels}>
                             {inputs.map(el => el)}
                         </div>
                         <br/>
-                        <span>ORIGEN</span>
-                        <br/>
-                        <label>
-                            <input 
-                            type="checkbox" 
-                            name="created" 
-                            value='created'
-                            onClick={addFilter}
-                            defaultChecked= {isCheck('created')}
-                            />
-                            Creado
-                        </label>
-                        <br/>
-                        <label>
-                            <input 
+                        <div className={style.name}>ORIGEN</div>
+                        <div className={style.divOrigin}>
+                            <label className={style.checkbox}>
+                                <input 
                                 type="checkbox" 
-                                name="exist" 
-                                id="" 
-                                value='exist'
+                                name="created" 
+                                value='created'
                                 onClick={addFilter}
-                                defaultChecked= {isCheck('exist')}
+                                defaultChecked= {isCheck('created')}
                                 />
-                            Existente
-                        </label>
-                        <button onClick={applyFilter}>APLICAR FILTROS</button>
-                        <button onClick={deleteFilters}>LIMPIAR FILTROS</button>
+                                Creado
+                            </label>
+                            <label className={style.checkbox}>
+                                <input 
+                                    type="checkbox" 
+                                    name="exist" 
+                                    id="" 
+                                    value='exist'
+                                    onClick={addFilter}
+                                    defaultChecked= {isCheck('exist')}
+                                    />
+                                Existente
+                            </label>
+                        </div>
+                        
+                        <div className={style.divBtn}>
+                            <button 
+                            className= {style.btnModal}
+                            onClick={applyFilter}>APLICAR FILTROS</button>
+                            <button 
+                            className= {style.btnModal}
+                            onClick={deleteFilters}>LIMPIAR FILTROS</button>
+                        </div>
                     </form>
                 </div>
             </div>

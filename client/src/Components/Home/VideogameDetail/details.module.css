@@ -1,3 +1,172 @@
+.bgr {
+    background-image: url('https://s1.1zoom.me/b5050/201/323206-blackangel_1920x1080.jpg');
+    background-repeat: no-repeat;
+    width: 100vw;
+    max-width: 100%;
+    max-height: 100%;
+    top: 0;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    left: 0;
+    display: flex;
+    justify-content: center;
+}
+
+.btn {
+    background-color: #064B68;
+    color: #CFEFFC;
+    width: 8rem;
+    height: 3rem;
+    border: none;
+    border-radius: 8px;
+    position: fixed;
+    top: 1rem;
+    left: 1rem;
+}
+
+.btn:hover {
+    cursor: pointer;
+    width: 8.5rem;
+    height: 3.5rem;
+    left: 0.75rem;
+    top: 0.75rem;
+}
+
+.detail {
+    background-color: rgb(228, 231, 229, 0.5);
+    top: 0;
+    padding: 2rem;
+    width: 75vw;
+    margin: 2rem;
+    border-radius: 10px;
+}
+
+.title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: -1rem 0 3rem 0;
+    color: #E3E4E8;
+    background-color: #1C1D23;
+    padding: 1rem;
+    border-radius: 10px;
+}
+
+.grid {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.det {
+    background-color: #1C1D23;
+    color: #E3E4E8;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+}
+
 .image {
-    max-width: 40rem;
+    max-width: 30rem;
+    margin: 2rem;
+    border-radius: 10px;
+}
+
+.genres {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 0 0 0 ;
+}
+
+.platforms {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 0 0 0 ;
+}
+
+li {
+    margin: 10px;
+    list-style: none
+}
+
+.genresLi {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.platformsLi {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.released {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.ratingUp {
+    background-color: 	#008000;
+    color: #000;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    align-items: center;
+    width: 5rem;
+    height: 6rem;
+    justify-content: space-evenly;
+    transform: translate(10px, -2rem);
+    margin: 0 65vw;
+}
+
+.ratingMid {
+    background-color: #FFFF00;
+    color: #000;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    align-items: center;
+    width: 5rem;
+    height: 6rem;
+    justify-content: space-evenly;
+    transform: translate(10px, -2rem);
+    margin: 0 65vw;
+}
+
+.ratingLow {
+    background-color: #FF0000;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    align-items: center;
+    width: 5rem;
+    height: 6rem;
+    justify-content: space-evenly;
+    transform: translate(10px, -2rem);
+    margin: 0 65vw;
+}
+
+.description {
+    background-color: #1C1D23;
+    border-radius: 10px;
+    padding: 1rem;
+    color: #E3E4E8;
+}
+
+.descriptionDiv {
+    display: flex;
+    justify-content: center;
 }
