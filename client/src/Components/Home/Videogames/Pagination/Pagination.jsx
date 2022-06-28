@@ -12,8 +12,6 @@ export default function Pagination (){
     let current = useSelector((state) => state.current)
     let dispatch = useDispatch()
 
-    console.log(error)
-
     let history = useHistory();
 
     const refresh = () => {

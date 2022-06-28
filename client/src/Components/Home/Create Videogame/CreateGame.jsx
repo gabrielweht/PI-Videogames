@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import axios from 'axios'
 import Platforms from "./Platforms"
 import Genres from "./Genres"
@@ -6,7 +6,6 @@ import { ArraysComponents, FirstComponent, OtherComponents } from "./FormCompone
 import { useHistory } from "react-router-dom"
 import styles from './createGames.module.css'
 import Videogame from "../Videogames/Videogame"
-
 
 
 export function validate(input){
@@ -25,7 +24,7 @@ export function validate(input){
     return errors
 }
 
-export default function PostGame(){
+export default function CreateGame(){
     const [ created, setCreated ] = useState('')
     const [newGame, setNewGame ] = useState({})
     const [ inputs, setInputs ] = useState({
@@ -41,6 +40,10 @@ export default function PostGame(){
     const [ errors, setErrors ] = useState({})
     const [ platformActive, setPlatformActive ] = useState(false)
     const [ genreActive, setGenreActive ] = useState(false)
+
+    useEffect(() => {
+        window.scroll(0, 0)
+    }, [])
 
     function handleInputChange(e){
         
@@ -78,12 +81,13 @@ export default function PostGame(){
     async function postGame(e){
         e.preventDefault()
         setErrors(validate(inputs))
-            try {           
+            try {          
                 const response = await axios.post('http://localhost:3001/videogame', inputs)
                 if(response.data) {
                     setNewGame(response.data.game)
                     setCreated(response.data.message)
                     setWarning('')
+                    window.scroll(0, 0)
                 }
             } catch (error) {
                 setWarning(error.response.data)
@@ -113,9 +117,6 @@ export default function PostGame(){
                         name = {newGame.name}
                         image = {newGame.background_image}
                         />
-                        <button 
-                        className={styles.btnSubmit}
-                        onClick={redirect}>{'<'} Back to Home</button>
                     </div>
                     :
                 <div className={styles.component}>

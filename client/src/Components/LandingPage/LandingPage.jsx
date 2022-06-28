@@ -18,10 +18,9 @@ export default function Home (){
             <button 
             className={styles.btn}
             onClick={redirect}>
-                Comenzar
+                Start
             </button>
         </div>
     </div>
     )
-    
 }

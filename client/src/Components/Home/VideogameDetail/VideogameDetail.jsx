@@ -25,7 +25,10 @@ export default function VideogameDetail(){
         history.push('/videogames')
     }
 
-    return (<div className={details.bgr}>
+    return (
+    <>
+    
+    <div className={details.bgr}>
         <button 
         className={details.btn}
         onClick={redirect}> 
@@ -68,6 +71,7 @@ export default function VideogameDetail(){
         </div>
         </div>
         : <Loading />}
-    
-    </div>)
+    </div>
+    </>
+    )
 } 

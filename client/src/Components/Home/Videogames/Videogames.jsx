@@ -11,8 +11,6 @@ export default function Videogames (){
             <div className={styles.bgr}>
                 <NavBar />
                 <Pagination />
-                <footer>
-                </footer>
             </div>
     )
 }

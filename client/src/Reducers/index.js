@@ -35,7 +35,7 @@ export default function rootReducer(state = initialState, action) {
                 errors: action.error
             }
         case VIDEOGAME_FILTERED:
-            let games = [...state.videogames]
+            let games = [...state.videogamesLoaded]
             let filteredVideogame = []
             let filters = action.payload
             if(action.payload.includes('created')){
