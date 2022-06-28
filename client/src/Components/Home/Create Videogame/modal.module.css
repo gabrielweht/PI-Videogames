@@ -1,0 +1,94 @@
+.container {
+    background: rgb(0, 0, 0, 0.5);
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card{
+    width: 500px;
+    height: 350px;
+    background-color: #DFDBF0;
+    border-radius: 5px;
+}
+
+.title {
+    display: flex;
+    justify-content: center;
+    margin-top: 35px;
+    margin-bottom: 10px;
+}
+
+.divPlat {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    flex-direction: column;
+    height: 10rem;
+    align-content: space-around;
+}
+
+.divInput {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.input {
+    background-color: transparent;
+    border-color: black;
+    outline: none;
+    border-radius: 1rem;
+    padding: .4rem;
+}
+
+.btnX {
+    background-color: #064B68;
+    color: #DFDBF0;
+    width: 2rem;
+    height: 2rem;
+    border: none;
+    border-radius: 5px;
+    margin: 10px;
+    position: fixed;
+}
+
+
+
+.btnAdd {
+    background-color: #064B68;
+    color: #DFDBF0;
+    width: 10rem;
+    height: 2rem;
+    border: none;
+    border-radius: 5px;
+    margin: 5px;
+}
+
+.btnSubmit {
+    top: 50%;
+    font-size: 1rem;
+    background-color: #064B68;
+    color: #DFDBF0;
+    width: 5rem;
+    height: 2.5rem;
+    border: none;
+    border-radius: 5px;
+    margin: 15px;
+}
+
+.btnX:hover , .btnAdd:hover, .btnSubmit:hover {
+    cursor: pointer;
+    transform: translate(0, -1px);
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

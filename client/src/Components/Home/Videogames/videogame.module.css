@@ -1,0 +1,153 @@
+.cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    margin-top: 5rem;
+}
+
+.card {
+    background-color: #6D7A6F;
+    border-color: #6D7A6F;
+    border-radius: 1rem;
+    width: 15rem;
+    height: 18rem;
+    padding: 0.4rem;
+    margin: 2rem;
+    box-shadow: 0 2px 10px rgb(0 0 0 / 20%);
+    margin-block-end: 1rem;
+    margin-block-start: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    align-content: center;
+}
+
+.card:hover {
+    cursor: pointer;
+    transform: translate(0, -2px);
+    
+}
+
+.link {
+    text-decoration: none;
+    color: #E4E7E5;
+}
+
+.image {
+    width: 14em;
+    height: 9em;
+    border-radius: .5rem;
+}
+
+.title {
+    text-align: center;
+}
+
+.genres {
+    display: flex;
+    margin: 0;
+    align-items: center;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    padding: 0;
+}
+
+.btn {
+    position: fixed;
+    right: 3rem;
+    top: 40rem;
+    border: none;
+    background-color: #064B68;
+    color: #CFEFFC;
+    border-radius: 8px;
+    width: 10rem;
+    height: 3rem;
+    font-size: 1rem;
+}
+
+.btn:hover {
+    cursor: pointer;
+    width: 10.5rem;
+    height: 3.5rem;
+    right: 2.75rem;
+    top: 39.75rem;
+    font-size: 1.05rem;
+}
+
+.navPag {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+}
+
+.btnPag {
+    color: #E4E7E5;
+    background-color: #6D7A6F;
+    border: none;
+    border-radius: 5px;
+    margin: 5px;
+    padding: 8px;
+    font-size: 1rem;
+}
+.btnPag:hover {
+    cursor: pointer;
+    color: #6D7A6F;
+    padding: 10px;
+    margin: 3px;
+    background-color: #E4E7E5;
+}
+
+.btnPagActive {
+    color: #6D7A6F;
+    background-color: #E4E7E5;
+    border: none;
+    border-radius: 5px;
+    margin: 5px;
+    padding: 10px;
+    font-size: 1rem;
+}
+
+.bgr {
+    background-image: url('https://s1.1zoom.me/b5050/240/Warriors_Just_Cause_Men_4_557761_1920x1080.jpg');
+    background-repeat: no-repeat;
+    width: 100vw;
+    max-width: 100%;
+    max-height: 100%;
+    top: 0;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    left: 0;
+    padding: 1rem 0 0 0;
+}
+
+.error {
+    background-color: rgb(0, 0, 0, 0.8);
+    width: 100vw;
+    height: 98vh;
+    max-width: 100%;
+    max-height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.imgError{
+    border-radius: 10px;
+}
+
+.btnRefresh {
+    right: 3rem;
+    top: 40rem;
+    border: none;
+    background-color: #064B68;
+    color: #CFEFFC;
+    border-radius: 8px;
+    width: 10rem;
+    height: 3rem;
+    font-size: 1rem;
+    margin: 20px
+}

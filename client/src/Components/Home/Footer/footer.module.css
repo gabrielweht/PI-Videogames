@@ -1,0 +1,21 @@
+footer {
+    background-color: #767C88;
+}
+
+.container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.text {
+    color: #E4E5E7;
+    width: 40rem;
+    margin-left: 20px;
+    text-align: center;
+}
+
+.hr {
+    margin: 0;
+}
