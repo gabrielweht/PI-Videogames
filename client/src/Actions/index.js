@@ -13,11 +13,23 @@ export function getVideogames(order, filters) {
 
 export function getVideogamesByName(name) {
     return async (dispatch) => {
-        const games = await axios.get(`http://localhost:3001/videogames?name=${name}`)
-        dispatch({
-            type: GET_VIDEOGAMES_NAME,
-            payload: games.data.gamesArray
-        })
+        try {
+            const games = await axios.get(`http://localhost:3001/videogames?name=${name}`)
+            if(games.data.gamesArray.length > 0) {
+                dispatch({
+                    type: GET_VIDEOGAMES_NAME,
+                    payload: games.data.gamesArray
+                })
+            }   
+        } catch (error) {
+            dispatch( {
+                type: GET_VIDEOGAMES_NAME,
+                payload: [],
+                error: error.response.data
+            })  
+        }
+            
+
     }
 }
 

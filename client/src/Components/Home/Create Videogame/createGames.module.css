@@ -89,7 +89,7 @@
     font-size: 1rem;
     background-color: #064B68;
     color: #CFEFFC;
-    width: 9rem;
+    width: 10rem;
     height: 3rem;
     border: none;
     border-radius: 8px;
@@ -98,9 +98,10 @@
 
 .btnSubmit:hover {
     cursor: pointer;
-    width: 9.5rem;
+    width: 10.5rem;
     height: 3.5rem;
     margin: .75rem;
+    font-size: 1.05rem;
 }
 
 .btnBack {
@@ -120,4 +121,37 @@
     width: 8.5rem;
     height: 3.5rem;
     margin: 1.75rem;
+    font-size: 1.05rem;
+}
+
+.warning {
+    background-color: rgba(244, 149, 149, 0.5);
+    font-size: 1.05rem;
+    border: 2px solid red;
+    color: #f00;
+    width: 400px;
+    text-align: center;
+    padding: 1rem 0 1rem 0;
+}
+
+.created {
+    background-color: rgb(228, 231, 229, 0.7);
+    top: 0;
+    padding: 2rem 2rem 2rem 2rem;
+    width: 30vw;
+    height: 80vh;
+    margin: 2rem 0 2.7rem 0;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.message {
+    border: 2px solid green;
+    padding: 2rem;
+    background-color: rgba(124, 222, 124, 0.5);
+    color: green;
 }

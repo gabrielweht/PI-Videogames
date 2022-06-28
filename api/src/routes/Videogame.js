@@ -78,7 +78,13 @@ router.post('/', async (req, res, next) => {
             game.addGenre(searchGenre)
         })
 
-        res.send('El juego fue creado correctamente')
+        console.log(game.dataValues)
+        const gameCreated = {
+            game: game.dataValues,
+            message: 'El juego fue creado correctamente'
+        }
+
+        res.json(gameCreated)
     } catch (error) {
         next(error)
     }

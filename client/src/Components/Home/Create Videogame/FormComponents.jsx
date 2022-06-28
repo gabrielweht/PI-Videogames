@@ -54,8 +54,8 @@ export function FirstComponent ({ errors, handleChange }){
                 {errors.description && (<p className={stylesLabels.dangerText}>{errors.description}</p>)}
             </div>
             <div className={styles.divs}>
-                <label className={stylesLabels.labels}>
-                    <span className={stylesLabels.spans}>Image</span>
+                <label className={errors.image ? stylesLabels.danger : stylesLabels.labels}>
+                    <span className={stylesLabels.spans}>URL Image</span>
                     <input 
                         onFocus={(e) => {
                             e.target.previousElementSibling.classList.add(stylesLabels.spansTop)
@@ -71,10 +71,11 @@ export function FirstComponent ({ errors, handleChange }){
                         }}
                         className={stylesLabels.inputs}
                         autoComplete='off'
-                        type='url' 
+                        type='text' 
                         name='background_image'
                         onChange={handleChange}/>
                 </label>
+                {errors.image && (<p className={stylesLabels.dangerText}>{errors.image}</p>)}
             </div>
         </>
     )
@@ -131,27 +132,28 @@ export function ArraysComponents (params){
     )
 }
 
-export function OtherComponents ({handleChange}) {
+export function OtherComponents ({handleChange, errors}) {
     return (
         <>
-            <div className={styles.divs}>
-                <label className={stylesLabels.labelDate}>
+            <div className={stylesLabels.divDate}>
+                <label className={errors.released ? stylesLabels.dangerDate : stylesLabels.labelDate}>
                     <span>Released</span>
                     <input 
-                        className={stylesLabels.inputDate}
+                        className={errors.released ? stylesLabels.inputDanger : stylesLabels.inputDate}
                         type='date' 
                         name='released'
                         onChange={handleChange}
                         />
                 </label>
+                {errors.released && <p className={stylesLabels.dangerText}>{errors.released}</p>}
             </div>
             <div className={styles.divs}>
                 <label className={stylesLabels.labelRating}>
                     <span>Rating</span>
-                <input 
+                <input
                     className={stylesLabels.inputRating}
                     type='number' 
-                    min='1' 
+                    min='0' 
                     max='5' 
                     step='0.1' 
                     name='rating'

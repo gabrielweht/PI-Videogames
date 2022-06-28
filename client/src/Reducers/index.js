@@ -6,7 +6,8 @@ const initialState = {
     videogamesLoaded: [],
     current: 0,
     order: 'sinOrden',
-    filters: []
+    filters: [],
+    errors: ''
 }
 
 export default function rootReducer(state = initialState, action) {
@@ -30,7 +31,8 @@ export default function rootReducer(state = initialState, action) {
         case GET_VIDEOGAMES_NAME:
             return {
                 ...state,
-                videogamesLoaded: action.payload.slice(0, 15)
+                videogamesLoaded: action.payload.slice(0, 15),
+                errors: action.error
             }
         case VIDEOGAME_FILTERED:
             let games = [...state.videogames]
@@ -57,7 +59,7 @@ export default function rootReducer(state = initialState, action) {
                 filters: action.payload
             }
         case SORT:
-            let videogamesOrderer = [...state.videogames]
+            let videogamesOrderer = [...state.videogamesLoaded]
             let orderState
             if(action.payload !== state.order) orderState = action.payload
             else orderState = state.order

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { getVideogamesByName } from '../../../Actions/index'
+import { cleanUp, getVideogamesByName } from '../../../Actions/index'
 import styles from './searchBar.module.css'
 
 export default  function SearchBar(){
@@ -9,6 +9,8 @@ export default  function SearchBar(){
 
     function searchName (e){
         e.preventDefault();
+        if(!search) return;
+        dispatch(cleanUp())
         dispatch(getVideogamesByName(search));
     }
     function changeSearch(e){

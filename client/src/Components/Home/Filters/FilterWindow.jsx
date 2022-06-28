@@ -66,6 +66,7 @@ export default function FilterWindow ({active, setActive}){
                     className={style.btnX}
                     >X</button>
                     <div className={style.name}>FILTRAR POR</div>
+                    <hr/>
                     <form>
                         <div className={style.name}>GÉNERO</div>
                         <div className={style.divLabels}>

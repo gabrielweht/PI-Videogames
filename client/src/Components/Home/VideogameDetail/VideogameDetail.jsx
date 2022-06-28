@@ -31,10 +31,11 @@ export default function VideogameDetail(){
         onClick={redirect}> 
             {'< '}  Back to Home
         </button>
+        
         {game ? <div className={details.detail}>
-        <div 
+        <div
         className={
-            game.rating >= 4 ? details.ratingUp : game.rating >= 3 ? details.ratingMid : details.ratingLow
+            game.rating >= 3 ? details.ratingUp : game.rating >= 2 ? details.ratingMid : details.ratingLow
             }>
             <div>Rating</div>
             <div>{game.rating}</div>
@@ -46,13 +47,13 @@ export default function VideogameDetail(){
                 <ul className={details.genres}>
                     GENRES
                     <div className={details.genresLi}>
-                        {game.genres?.map(g => <li>{g}</li>)}
+                        {game.genres?.map((g, index) => <li key={index}>{g}</li>)}
                     </div>
                 </ul>
                 <ul className={details.platforms}>
                     PLATFORMS
                     <div className={details.platformsLi}>
-                        {game.platforms?.map(pl => <li>{pl}</li>)}
+                        {game.platforms?.map((pl, index) => <li key={index}>{pl}</li>)}
                     </div>
                 </ul>
                 <div className={details.released}>
@@ -65,7 +66,8 @@ export default function VideogameDetail(){
             <div className={details.descriptionDiv}>DESCRIPTION</div>
             <p dangerouslySetInnerHTML={{__html: game.description}}/>
         </div>
-        
-    </div> : <Loading />}
+        </div>
+        : <Loading />}
+    
     </div>)
 } 

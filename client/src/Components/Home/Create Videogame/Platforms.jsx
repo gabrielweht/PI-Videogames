@@ -73,20 +73,35 @@ export default function Platforms({active, setActive, handleClick, platformSelec
                 active && 
                 <div className={platform.container}>
                     <div className={platform.card}>
-                        <button onClick={() => setActive(!active)}>X</button>
-                        <br/>
-                        {platforms.map((plat, index) => {
-                        return (<label key={index}><input 
-                            type='checkbox'           
-                            value={plat}
-                            onClick={pushPlatform}
-                            defaultChecked={isCheck(plat)}
-                        />{plat}</label>)})}
-                        <br/>
-                        <input type='text' value={newPlatform} onChange={(e) => setNewPlatform(e.target.value)} placeholder='Escribe una plataforma'/>
-                        <button onClick={pushNewPlatform}>Agregar Plataforma</button>
-                        <br/>
-                        <button onClick={addPlatforms}>Listo</button>
+                        <button 
+                            className={platform.btnX}
+                            onClick={() => setActive(!active)}>X</button>
+                        <h4 className={platform.title}>SELECT PLATFORMS</h4>
+                        <hr/>
+                            <div className={platform.divPlat}>
+                                {platforms.map((plat, index) => {
+                                return (<label key={index}><input 
+                                    type='checkbox'           
+                                    value={plat}
+                                    onClick={pushPlatform}
+                                    defaultChecked={isCheck(plat)}
+                                />{plat}</label>)})}
+                            </div>
+                            <div className={platform.divInput}>
+                                <input 
+                                className={platform.input}
+                                type='text' value={newPlatform} onChange={(e) => setNewPlatform(e.target.value)} placeholder='Escribe una plataforma'/>
+                                <button 
+                                className={platform.btnAdd}
+                                onClick={pushNewPlatform}>Agregar Plataforma</button>
+                            </div>
+                        <div className={platform.column}>
+                            <button 
+                            className={platform.btnSubmit}
+                            onClick={addPlatforms}>
+                                Listo
+                            </button>
+                        </div>
                     </div>
                 </div>
             }

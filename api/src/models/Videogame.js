@@ -31,7 +31,7 @@ module.exports = (sequelize) => {
     rating: {
       type: DataTypes.FLOAT,
       validate: {
-        min: 1,
+        min: 0,
         max: 5
       }
     },

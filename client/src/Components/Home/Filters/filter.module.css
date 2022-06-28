@@ -64,10 +64,14 @@
     margin: 13px 20px 13px 10px;
 }
 
+.checkbox:hover {
+    cursor: pointer;
+}
+
 .name {
     display: flex;
     justify-content: center;
-    margin: 15px;
+    margin-bottom: 15px;
 }
 
 .btnModal {
@@ -86,6 +90,11 @@
     margin: 50px 0;
 }
 
+
+.btnX:hover, .btnModal:hover {
+    cursor: pointer;
+    transform: translate(0, -1px);
+}
 
 
 

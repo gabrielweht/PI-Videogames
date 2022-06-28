@@ -71,21 +71,34 @@ export default function Genres({ active, setActive, handleClick, genreSelected})
             active && 
             <div className={genre.container}>
                 <div className={genre.card}>
-                    <button onClick={() => setActive(!active)}>X</button>
-                    <br/>
-                    {genres.map((genre, index) => {
-                    return (<label key={index}>
+                    <button 
+                    className={genre.btnX}
+                    onClick={() => setActive(!active)}>X</button>
+                    <h4 className={genre.title}>SELECT GENRES</h4>
+                    <hr/>
+                    <div className={genre.divPlat}>
+                        {genres.map((genre, index) => {
+                        return (<label key={index}>
+                            <input 
+                                type='checkbox'  
+                                value={genre}
+                                onClick={pushGenre}
+                                defaultChecked={isCheck(genre)}
+                        />{genre}</label>)})}
+                    </div>
+                    <div className={genre.divInput}>
                         <input 
-                            type='checkbox'  
-                            value={genre}
-                            onClick={pushGenre}
-                            defaultChecked={isCheck(genre)}
-                    />{genre}</label>)})}
-                    <br/>
-                    <input type='text' value={newGenre} onChange={(e) => setNewGenre(e.target.value)} placeholder='Escribe una plataforma'/>
-                    <button onClick={pushNewGenre}>Agregar Género</button>
-                    <br/>
-                    <button onClick={addGenres}>Listo</button>
+                        className={genre.input}
+                        type='text' value={newGenre} onChange={(e) => setNewGenre(e.target.value)} placeholder='Escribe una plataforma'/>
+                        <button 
+                        className={genre.btnAdd}
+                        onClick={pushNewGenre}>Agregar Género</button>
+                    </div>
+                    <div className={genre.column}>
+                        <button 
+                        className={genre.btnSubmit}
+                        onClick={addGenres}>Listo</button>
+                    </div>
                 </div>
             </div>
         }

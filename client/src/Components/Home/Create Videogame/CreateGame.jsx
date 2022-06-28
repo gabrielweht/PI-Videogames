@@ -5,34 +5,42 @@ import Genres from "./Genres"
 import { ArraysComponents, FirstComponent, OtherComponents } from "./FormComponents"
 import { useHistory } from "react-router-dom"
 import styles from './createGames.module.css'
+import Videogame from "../Videogames/Videogame"
 
 
 
 export function validate(input){
+    const reg_ex_url = /(http|https|ftp|ftps):\/\/[a-zA-Z0-9\-.]+\.[a-zA-Z]{2,3}(\/\S*)?/
+    const reg_ex_img = /.*(png|jpg|jpeg|gif)$/
+    let date = new Date();
+    let output = String(date.getFullYear() + '-' + String(date.getMonth() + 1).padStart(2, '0') + '-' + date.getDate()).padStart(2, '0');
     let errors = {}
     if(!input.name) errors.name = 'El nombre del videojuego es obligatorio'
     if(!input.description) errors.description = 'Se necesita una descripción'
     if(!input.platforms.length) errors.platforms = 'Debe seleccionar al menos una plataforma'
+    if(input.released > output) errors.released = 'La fecha de lanzamiento no puede ser posterior a la fecha actual'
+    if(input.background_image){
+        if(!reg_ex_url.test(input.background_image) || !reg_ex_img.test(input.background_image)) errors.image = 'El dato ingresado no coincide con el URL de una imagen'
+    }
     return errors
 }
 
 export default function PostGame(){
     const [ created, setCreated ] = useState('')
+    const [newGame, setNewGame ] = useState({})
     const [ inputs, setInputs ] = useState({
         name: '',
         description: '',
         platforms: [],
         genres: [],
         released: undefined,
-        rating: 1,
+        rating: 0,
         background_image: ''
     })
     const [ warning, setWarning ] = useState('')
     const [ errors, setErrors ] = useState({})
     const [ platformActive, setPlatformActive ] = useState(false)
     const [ genreActive, setGenreActive ] = useState(false)
-
-    console.log(errors)
 
     function handleInputChange(e){
         
@@ -41,15 +49,10 @@ export default function PostGame(){
             [e.target.name]: e.target.value
         }
         setInputs(newInput)
-        if(e.target.value) {
-            setErrors({
-                ...errors,
-                [e.target.name]: undefined
-            })
-        }
-        else {
-            setErrors(validate(newInput))
-        }
+        setErrors({
+            ...errors,
+            [e.target.name]: undefined
+        })
     }
 
     function handleArrays(arr, llave){
@@ -78,7 +81,8 @@ export default function PostGame(){
             try {           
                 const response = await axios.post('http://localhost:3001/videogame', inputs)
                 if(response.data) {
-                    setCreated(response.data)
+                    setNewGame(response.data.game)
+                    setCreated(response.data.message)
                     setWarning('')
                 }
             } catch (error) {
@@ -101,20 +105,24 @@ export default function PostGame(){
             </button>
 
             <div className={styles.bgr}>
-                
+            {created ? 
+                    <div className={styles.created}>
+                        <div className={styles.message}>{created}</div> 
+                        <Videogame 
+                        id= {newGame.id}
+                        name = {newGame.name}
+                        image = {newGame.background_image}
+                        />
+                        <button 
+                        className={styles.btnSubmit}
+                        onClick={redirect}>{'<'} Back to Home</button>
+                    </div>
+                    :
                 <div className={styles.component}>
                     <h1 className={styles.title}>
                         Creá tu juego
                     </h1>
-                    {warning && <p>{warning}</p>}
-                    {created ? 
-                    <>
-                        <div>{created}</div> 
-                        <button 
-                        className={styles.btnSubmit}
-                        onClick={redirect}>{'<'} Back to Home</button>
-                    </>
-                    : 
+                    {warning && <p className={styles.warning}>{warning}</p>} 
                     <form 
                     className={styles.form}
                     onSubmit={postGame}>
@@ -130,8 +138,10 @@ export default function PostGame(){
                             setGenreActive={setGenreActive}
                             genreActive={genreActive}
                         />
-                        <OtherComponents handleChange={handleInputChange}/>
-                    </form>}
+                        <OtherComponents 
+                            errors={errors}
+                            handleChange={handleInputChange}/>
+                    </form>
                     <Platforms 
                         active={platformActive} 
                         setActive={setPlatformActive}
@@ -145,6 +155,7 @@ export default function PostGame(){
                         genreSelected={inputs.genres}
                     />
                 </div>
+                }
             </div>
         </>
     )
