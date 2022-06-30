@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { filteredVideogames, getGenres } from "../../../Actions";
+import { cleanUp, filteredVideogames, getGenres } from "../../../Actions";
 import style from './filter.module.css'
 
 export default function FilterWindow ({active, setActive}){
@@ -13,12 +13,14 @@ export default function FilterWindow ({active, setActive}){
     }, [dispatch])
 
     const addFilter = useCallback((e) => {
-        if(e.target.checked) setFilters([...filters, e.target.value])
+        if(!filters.includes(e.target.value)) setFilters([...filters, e.target.value])
         else {
             const deleteFilter = filters.filter(el => el !== e.target.value)
             setFilters(deleteFilter)
         }
     }, [filters])
+
+    console.log(filters)
 
     const isCheck = useCallback((name)=>{
         if (filters.length){
@@ -46,6 +48,7 @@ export default function FilterWindow ({active, setActive}){
 
     function applyFilter(e){
         e.preventDefault()
+        dispatch(cleanUp())
         dispatch(filteredVideogames(filters))
         setActive(!active)
     }

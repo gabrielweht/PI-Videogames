@@ -12,6 +12,7 @@ export default function Pagination (){
     let current = useSelector((state) => state.current)
     let dispatch = useDispatch()
 
+    console.log(videogames)
     let history = useHistory();
 
     const refresh = () => {

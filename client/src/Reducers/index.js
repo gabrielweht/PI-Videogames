@@ -35,27 +35,32 @@ export default function rootReducer(state = initialState, action) {
                 errors: action.error
             }
         case VIDEOGAME_FILTERED:
-            let games = [...state.videogamesLoaded]
+            let games = [...state.videogames]
             let filteredVideogame = []
             let filters = action.payload
-            if(action.payload.includes('created')){
+            if(filters.includes('created')){
                 filters = filters.filter(el => el !== 'created')
-                games = games.filter(g => typeof g.id !== 'number')
+                games.filter(g => typeof g.id !== 'number').forEach(game => filteredVideogame.push(game))
             }
-            if(action.payload.includes('exist')){
+            if(filters.includes('exist')){
                 filters = filters.filter(el => el !== 'exist')
-                games = games.filter(g => typeof g.id === 'number')
+                games.filter(g => typeof g.id === 'number').forEach(game => filteredVideogame.push(game))
             }
             if(filters.length){
                 filters.forEach((el) => {
-                    games.filter( g => g.genres?.includes(el)).forEach(game => filteredVideogame.push(game))
+                    games.filter( g => g.genres?.includes(el)).forEach(game => {
+                        filteredVideogame.push(game)})
                 })
-            } else {
-                filteredVideogame = games
+            } 
+            if(filteredVideogame.length === 0){
+                filteredVideogame = state.videogames
             }
+            let arrData = new Set(filteredVideogame)
+            let result = [...arrData]
+
             return {
                 ...state,
-                videogamesLoaded: filteredVideogame,
+                videogamesLoaded: result,
                 filters: action.payload
             }
         case SORT:
@@ -95,7 +100,6 @@ export default function rootReducer(state = initialState, action) {
         case CLEAN_UP:
             return{
                 ...state,
-                videogames: [],
                 videogamesLoaded: []
             }
         default:
