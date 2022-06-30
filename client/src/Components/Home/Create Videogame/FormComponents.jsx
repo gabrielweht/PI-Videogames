@@ -147,18 +147,17 @@ export function OtherComponents ({handleChange, errors}) {
                 </label>
                 {errors.released && <p className={stylesLabels.dangerText}>{errors.released}</p>}
             </div>
-            <div className={styles.divs}>
-                <label className={stylesLabels.labelRating}>
+            <div className={stylesLabels.divDate}>
+                <label className={errors.rating ? stylesLabels.dangerRating : stylesLabels.labelRating}>
                     <span>Rating</span>
                 <input
-                    className={stylesLabels.inputRating}
+                    className={errors.rating ? stylesLabels.errorRating : stylesLabels.inputRating}
                     type='number' 
-                    min='0' 
-                    max='5' 
                     step='0.1' 
                     name='rating'
                     onChange={handleChange}/>
                     </label>
+                {errors.rating && <p className={stylesLabels.dangerText}>{errors.rating}</p>}
             </div>
             <input className={styles.btnSubmit} type='submit' value='ADD NEW GAME' />
         </>

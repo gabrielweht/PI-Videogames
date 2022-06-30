@@ -9,7 +9,7 @@
     align-items: center;
     justify-items: center;
     background-color: #064B68;
-    z-index: 1;
+    z-index: 100;
 }
 
 .logo {

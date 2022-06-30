@@ -21,6 +21,7 @@ export function validate(input){
     if(input.background_image){
         if(!reg_ex_url.test(input.background_image) || !reg_ex_img.test(input.background_image)) errors.image = 'El dato ingresado no coincide con el URL de una imagen'
     }
+    if(input.rating > 5 || input.rating < 0) errors.rating = 'Debe ingresar un valor entre 0 y 5'
     return errors
 }
 
@@ -124,6 +125,7 @@ export default function CreateGame(){
                         Creá tu juego
                     </h1>
                     {warning && <p className={styles.warning}>{warning}</p>} 
+                    <p>Los campos con asterisco (*) son obligatorios</p>
                     <form 
                     className={styles.form}
                     onSubmit={postGame}>

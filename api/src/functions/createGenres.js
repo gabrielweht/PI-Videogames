@@ -8,7 +8,7 @@ async function createGenres() {
     try {
         const response = (await axios.get(`${url}?key=${API_KEY}`)).data.results
         response.forEach(async (genre) => {
-            const genres = await Genre.create({
+        const genres = await Genre.create({
                 name: genre.name
             })
         });
