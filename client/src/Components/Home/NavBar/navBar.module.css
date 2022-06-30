@@ -18,3 +18,7 @@
     width: 12rem;
     height: 4rem;
 }
+
+.logo:hover {
+    cursor: pointer;
+}
