@@ -1,4 +1,3 @@
-
 const { API_KEY } = process.env;
 const url = 'https://api.rawg.io/api/games'
 require('dotenv').config();

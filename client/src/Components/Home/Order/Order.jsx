@@ -25,8 +25,8 @@ export default function Order(){
                 <option value='sinOrden'  defaultValue='selected'></option>
                 <option value="ascendente"  defaultValue='selected'>A-Z</option>
                 <option value="descendente"  defaultValue='selected'>Z-A</option>
-                <option value="ratingAsc"  defaultValue='selected'>Rating ↓</option>
-                <option value="ratingDes" defaultValue='selected'>Rating ↑</option>
+                <option value="ratingAsc"  defaultValue='selected'>Rating ascendente</option>
+                <option value="ratingDes" defaultValue='selected'>Rating descendente</option>
             </select>
         </div>
     )
