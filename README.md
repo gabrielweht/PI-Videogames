@@ -43,5 +43,11 @@ Adicionalmente será necesario que creen desde psql una base de datos llamada `v
 
 El contenido de `client` fue creado usando: Create React App.
 
+En la terminal de bash hay que situarse sobre la capeta principal.
+
+Luego hacer `npm install` en la carpeta `client` y en la carpeta `api`.
+
+Una vez finalizadas las instalaciones, hacer `npm satart` en ambas carpetas
+
 
 
