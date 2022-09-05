@@ -83,7 +83,7 @@ export default function CreateGame(){
         e.preventDefault()
         setErrors(validate(inputs))
             try {          
-                const response = await axios.post('https://api-videogames-pi.herokuapp.com//videogame', inputs)
+                const response = await axios.post('https://api-pi-seven.vercel.app/videogame', inputs)
                 if(response.data) {
                     setNewGame(response.data.game)
                     setCreated(response.data.message)
