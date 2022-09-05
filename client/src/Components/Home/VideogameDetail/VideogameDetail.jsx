@@ -9,7 +9,7 @@ export default function VideogameDetail(){
     const {id} = useParams()
     const [ game, setGame ] = useState(null)
     useEffect(() => {
-        axios.get(`https://api-videogames-pi.herokuapp.com//videogame/${id}`)
+        axios.get(`https://api-pi-seven.vercel.app/videogame/${id}`)
         .then((response) => {
             setGame(response.data)
 
