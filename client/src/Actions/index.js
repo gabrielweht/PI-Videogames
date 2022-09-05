@@ -3,7 +3,7 @@ const axios = require('axios')
 
 export function getVideogames(order, filters) {
     return async (dispatch) => {
-        const games = await axios.get(`http://localhost:3001/videogames`)
+        const games = await axios.get(`https://api-videogames-pi.herokuapp.com//videogames`)
         dispatch({
             type: GET_VIDEOGAMES,
             payload: games.data.gamesArray,
@@ -14,7 +14,7 @@ export function getVideogames(order, filters) {
 export function getVideogamesByName(name) {
     return async (dispatch) => {
         try {
-            const games = await axios.get(`http://localhost:3001/videogames?name=${name}`)
+            const games = await axios.get(`https://api-videogames-pi.herokuapp.com//videogames?name=${name}`)
             if(games.data.gamesArray.length > 0) {
                 dispatch({
                     type: GET_VIDEOGAMES_NAME,
@@ -35,7 +35,7 @@ export function getVideogamesByName(name) {
 
 export function getGenres() {
     return async (dispatch) => {
-        const genres = await axios.get('http://localhost:3001/genres')
+        const genres = await axios.get('https://api-videogames-pi.herokuapp.com//genres')
         dispatch({
             type: GET_GENRES,
             payload: genres.data
@@ -66,7 +66,7 @@ export function sort(order) {
 
 export function addVideogame (body){
     return async (dispatch) => {
-        const createGame = await axios.post('http://localhost:3001/videogame', body)
+        const createGame = await axios.post('https://api-videogames-pi.herokuapp.com//videogame', body)
         dispatch({
             type: ADD_VIDEOGAME,
             payload: createGame.data
